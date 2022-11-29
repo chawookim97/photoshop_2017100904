@@ -6,6 +6,7 @@ from PySide6.QtGui import QAction, QImage, QPixmap
 from PySide6.QtWidgets import (
     QApplication, QWidget, QLabel, QMainWindow, QHBoxLayout, QVBoxLayout, QPushButton, QFileDialog
 )
+import ctypes
 
 class MainWindow(QMainWindow):
     def __init__(self):
@@ -62,10 +63,13 @@ class MainWindow(QMainWindow):
         widget.setLayout(main_layout)
         self.setCentralWidget(widget)
 
-    #이미지 불러오기    
+    #이미지 불러오기(예외처리)
     def show_file_dialog(self):
         file_name = QFileDialog.getOpenFileName(self, "이미지 열기", "./")
-        self.image = cv2.imread(file_name[0])
+        if file_name[0].split('.')[-1] in ('jpg','jpeg', 'png', 'JPG', 'PNG','JPEG'):
+            self.image = cv2.imread(file_name[0])
+        else : ctypes.windll.user32.MessageBoxW(0, "이미지 파일을 선택해주세요.", "Warning", 48)
+
         h, w, _ = self.image.shape
         bytes_per_line = 3 * w
         image = QImage(
@@ -73,7 +77,7 @@ class MainWindow(QMainWindow):
         ).rgbSwapped()
         pixmap = QPixmap(image)
         self.label1.setPixmap(pixmap)
-
+        
     #좌우반전 시키기
     def flip_image(self):
         image = cv2.flip(self.image, 1)
