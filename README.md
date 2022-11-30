@@ -6,7 +6,7 @@
 photoshop 파일을 실행하고 이미지 파일은 'cat.jpt', 'face.jpg', 'face2.jpg'를 이용하면 됨.
 
 ## 필요조건
->python버전 3.9
+>python = 3.9
 >
 >pyside6
 >
