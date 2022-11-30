@@ -27,19 +27,21 @@ class MainWindow(QMainWindow):
 
         #사이드바 메뉴버튼
         sidebar = QVBoxLayout()
-        button1 = QPushButton("좌우반전")
-        button2 = QPushButton("새로고침")
-        button3 = QPushButton("줄이기")
+        button1 = QPushButton("줄이기")
+        button2 = QPushButton("좌우반전")
+        button3 = QPushButton("워터마크")
         button4 = QPushButton("프로필사진 예측하기")
         button5 = QPushButton("모자이크")
-        button6 = QPushButton("워터마크")
-       
-        button1.clicked.connect(self.flip_image)
-        button2.clicked.connect(self.clear_label)
-        button3.clicked.connect(self.resize_image)
+        button6 = QPushButton("새로고침")
+        button7 = QPushButton("스캔")
+
+        button1.clicked.connect(self.resize_image)
+        button2.clicked.connect(self.flip_image)
+        button3.clicked.connect(self.water_mark)
         button4.clicked.connect(self.img_pred)
         button5.clicked.connect(self.mozaic)
-        button6.clicked.connect(self.water_mark)
+        button6.clicked.connect(self.clear_label)
+        button7.clicked.connect(self.clear_label)
 
         sidebar.addWidget(button1)
         sidebar.addWidget(button2)
@@ -47,16 +49,17 @@ class MainWindow(QMainWindow):
         sidebar.addWidget(button4)
         sidebar.addWidget(button5)
         sidebar.addWidget(button6)
+        sidebar.addWidget(button7)
 
         #레이블1
         self.label1 = QLabel(self)
-        self.label1.setFixedSize(640, 480)
+        self.label1.setFixedSize(700, 600)
         main_layout.addWidget(self.label1)
         #메인 레이아웃
         main_layout.addLayout(sidebar)
         #레이블2
         self.label2 = QLabel(self)
-        self.label2.setFixedSize(640, 480)
+        self.label2.setFixedSize(700, 600)
         main_layout.addWidget(self.label2)
 
         widget = QWidget(self)
